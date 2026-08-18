@@ -6,6 +6,22 @@ kept as simple as possible regarding dependencies so it can run on a wide range
 of systems. The script does not have to run on the same machine as on which the
 output of the package managers was generated.
 
+## Getting the latest Linux System definition
+
+The CSV files referenced below (e.g. `table-13_2026-02-25.csv`) are examples
+for local testing only. The current, authoritative Linux System definition
+should always be downloaded from
+[the export tool](https://definition.openinventionnetwork.com/export/):
+
+```bash
+TABLE=$(curl -sf https://definition.openinventionnetwork.com/api/tables/recent \
+  | jq -r '.recent_table.file_name | sub("\\.json$"; "")')
+
+curl -sf -o "${TABLE}_$(date +%F).csv" "https://definition.openinventionnetwork.com/api/export/csv?table=${TABLE}&fields=name,package_version,description,download_url,version_url,project_url,purl"
+```
+
+See [`test/README.md`](test/README.md) for further details.
+
 ## RPM
 
 First run `rpm -qia` on the target system and redirect the output to a file,
