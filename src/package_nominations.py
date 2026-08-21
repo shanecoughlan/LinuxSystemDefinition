@@ -79,9 +79,10 @@ def main(argv):
             if is_first:
                 is_first = False
                 continue
-            package_version, description, download_url, version_url, name, project_url = line
+            package_version, description, download_url, version_url, name, project_url, purl = line
             oin_packages[name.lower()] = {'version': package_version, 'dl_url': download_url,
-                                          'version_url': version_url, 'project_url': project_url}
+                                          'version_url': version_url, 'project_url': project_url,
+                                          'package_url': purl}
 
     if args.listing_type.lower() == 'rpm':
         # walk the RPM listing. Use the "Source RPM" attribute to filter
