@@ -17,7 +17,7 @@ TABLE=$(curl -sf https://definition.openinventionnetwork.com/api/tables/recent \
 curl -sf -o "$\{TABLE\}\_$(date +%F).csv" "https://definition.openinventionnetwork.com/api/export/csv?table=$\{TABLE\}&fields=name,package\_version,description,download\_url,version\_url,project\_url,purl"
 ```
 
-See [`test/README.md`](file:///Users/shanecoughlan/Software/LinuxSystemDefinition/test/README.md) for further details.
+See [`test/README.md`](test/README.md) for further details.
 
 ## RPM
 
