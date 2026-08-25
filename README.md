@@ -13,7 +13,7 @@ The CSV files referenced below (e.g. `table-13_2026-02-25.csv`) are examples fo
 ```
 TABLE=$(curl -sf https://definition.openinventionnetwork.com/api/tables/recent \
   | jq -r '.recent_table.file_name | sub("\\.json$"; "")')
-  
+
 curl -sf -o "${TABLE}_$(date +%F).csv" "https://definition.openinventionnetwork.com/api/export/csv?table=${TABLE}&fields=name,package_version,description,download_url,version_url,project_url,purl"
 ```
 
