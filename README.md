@@ -8,13 +8,13 @@ It has been kept as simple as possible regarding dependencies so it can run on 
 
 ## Getting the latest Linux System definition
 
-The CSV files referenced below (e.g. `table-13\_2026-02-25.csv`) are examples for local testing only. The current, authoritative Linux System definition should always be downloaded from [the export tool](https://definition.openinventionnetwork.com/export/):
+The CSV files referenced below (e.g. `table-13_2026-02-25.csv`) are examples for local testing only. The current, authoritative Linux System definition should always be downloaded from [the export tool](https://definition.openinventionnetwork.com/export/):
 
 ```
-TABLE=$(curl -sf https://definition.openinventionnetwork.com/api/tables/recent \\  
-  | jq -r '.recent\_table.file\_name | sub("\\\\.json$"; "")')  
+TABLE=$(curl -sf https://definition.openinventionnetwork.com/api/tables/recent \  
+  | jq -r '.recent_table.file_name | sub("\\.json$"; "")')  
   
-curl -sf -o "$\{TABLE\}\_$(date +%F).csv" "https://definition.openinventionnetwork.com/api/export/csv?table=$\{TABLE\}&fields=name,package\_version,description,download\_url,version\_url,project\_url,purl"
+curl -sf -o "${TABLE}_$(date +%F).csv" "https://definition.openinventionnetwork.com/api/export/csv?table=${TABLE}&fields=name,package_version,description,download_url,version_url,project_url,purl"
 ```
 
 See [`test/README.md`](test/README.md) for further details.
@@ -24,13 +24,13 @@ See [`test/README.md`](test/README.md) for further details.
 First run `rpm -qia` on the target system and redirect the output to a file, for example:
 
 ```
-$ rpm -qia \> /tmp/rpm
+$ rpm -qia > /tmp/rpm
 ```
 
 Then copy the file to the system running the script and run:
 
 ```
-$ python package\_nominations.py -l /tmp/rpm -c table-13\_2026-02-25.csv -t rpm
+$ python package_nominations.py -l /tmp/rpm -c table-13_2026-02-25.csv -t rpm
 ```
 
 It might be needed to adapt paths to point to the right locations.
@@ -38,17 +38,17 @@ It might be needed to adapt paths to point to the right locations.
 ## DEB
 
 ```
-$ apt list --installed  | cut -f 1 -d / | xargs -I% apt show % \> /tmp/deb
+$ apt list --installed  | cut -f 1 -d / | xargs -I% apt show % > /tmp/deb
 
-$ python package\_nominations.py -l /tmp/deb -c table-13\_2026-02-25.csv -t deb
+$ python package_nominations.py -l /tmp/deb -c table-13_2026-02-25.csv -t deb
 ```
 
 ## Python pip
 
 ```
-$ pip list | tail -n +3 | cut -f 1 -d " " | xargs -I% pip show % \> /tmp/pip
+$ pip list | tail -n +3 | cut -f 1 -d " " | xargs -I% pip show % > /tmp/pip
 
-$ python package\_nominations.py -l /tmp/pip -c table-13\_2026-02-25.csv -t pip
+$ python package_nominations.py -l /tmp/pip -c table-13_2026-02-25.csv -t pip
 ```
 
 ## Shortcomings
