@@ -11,7 +11,7 @@ It has been kept as simple as possible regarding dependencies so it can run on 
 The CSV files referenced below (e.g. `table-13_2026-02-25.csv`) are examples for local testing only. The current, authoritative Linux System definition should always be downloaded from [the export tool](https://definition.openinventionnetwork.com/export/):
 
 ```
-TABLE=$(curl -sf https://definition.openinventionnetwork.com/api/tables/recent \  
+TABLE=$(curl -sf https://definition.openinventionnetwork.com/api/tables/recent \
   | jq -r '.recent_table.file_name | sub("\\.json$"; "")')  
   
 curl -sf -o "${TABLE}_$(date +%F).csv" "https://definition.openinventionnetwork.com/api/export/csv?table=${TABLE}&fields=name,package_version,description,download_url,version_url,project_url,purl"
